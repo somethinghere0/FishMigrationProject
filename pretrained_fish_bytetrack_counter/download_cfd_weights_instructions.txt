@@ -1,0 +1,17 @@
+Community Fish Detector weights are not bundled in this project.
+
+Download from:
+https://github.com/filippovarini/community-fish-detector/releases
+
+Recommended first model for volunteer laptops:
+- RF-DETR Nano 640 .pth
+
+After download, place it here:
+weights/cfd-2026.02.02-rf-detr-nano-640.pth
+
+Then update configs/cfd_counter.yaml:
+model:
+  weights: weights/<your_downloaded_file>.pth
+  resolution: 640
+
+For RF-DETR Small/Medium, use resolution: 1024.

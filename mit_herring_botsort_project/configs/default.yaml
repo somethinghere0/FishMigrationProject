@@ -1,0 +1,73 @@
+project_name: mit_herring_botsort_from_scratch
+seed: 42
+device: cuda
+
+paths:
+  raw_root: data/raw/mit-river-herring
+  coco_json: data/raw/mit-river-herring/metadata.json
+  processed_root: data/processed/mit_herring_preprocessed
+  output_dir: runs/mit_herring
+
+classes:
+  # Use "all_fish" to merge all fish categories into one counting class.
+  # Use "species" to preserve COCO categories.
+  mode: all_fish
+  fish_category_names:
+    - river herring
+    - unknown fish
+    - trout
+    - bass
+    - perch
+    - eel
+    - sunfish
+    - lamprey
+
+preprocessing:
+  enabled: true
+  resize_long_side: null
+  apply_barrel_undistort: false
+  # Use calibration from checkerboard if available. Otherwise keep null.
+  camera_matrix: null
+  dist_coeffs: null
+  gray_world_white_balance: true
+  clahe: true
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: 8
+  gamma_correction: true
+  gamma: 1.05
+  sharpen: false
+  denoise: false
+
+train:
+  model: fasterrcnn_resnet50_fpn
+  pretrained_backbone: false
+  from_scratch: true
+  batch_size: 2
+  num_workers: 4
+  epochs: 40
+  lr: 0.005
+  weight_decay: 0.0005
+  momentum: 0.9
+  lr_step_size: 12
+  lr_gamma: 0.2
+  amp: true
+  gradient_clip_norm: 5.0
+  val_fraction: 0.15
+  test_fraction: 0.10
+  min_box_area: 12
+  include_empty_images: true
+  empty_image_fraction: 1.0
+  image_extensions: [".jpg", ".jpeg", ".png", ".bmp"]
+
+inference:
+  score_threshold: 0.35
+  nms_threshold: 0.50
+  save_annotated: true
+
+tracking:
+  detector_score_threshold: 0.35
+  iou_match_threshold: 0.25
+  max_age: 30
+  min_hits: 2
+  count_line: null   # Example: [[100, 500], [1200, 500]]; null means count unique confirmed tracks.
+  direction: any     # any, up, down, left, right

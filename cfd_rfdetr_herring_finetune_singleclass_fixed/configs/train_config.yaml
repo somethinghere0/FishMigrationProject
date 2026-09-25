@@ -1,0 +1,17 @@
+# CFD RF-DETR fine-tuning configuration
+# Use Nano first for student laptops / limited GPUs.
+model_size: nano   # nano, small, medium
+pretrain_weights: weights/cfd-2026.02.02-rf-detr-nano-640.pth
+
+dataset_dir: datasets/herring_yolo
+output_dir: outputs/cfd_herring_finetune
+
+epochs: 25
+batch_size: 2
+grad_accum_steps: 8
+lr: 0.00005
+lr_encoder: 0.00001
+image_size: 640
+
+# If the machine runs out of GPU memory, set batch_size to 1 and grad_accum_steps to 16.
+# Total effective batch size = batch_size * grad_accum_steps.

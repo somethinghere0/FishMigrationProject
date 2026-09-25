@@ -1,0 +1,55 @@
+# Pretrained fish detector -> ByteTrack-style tracker -> herring count
+
+input:
+  # Put one .mp4/.mov/.avi here or a folder of videos/images
+  source: data/videos
+  output_dir: outputs/cfd_results
+
+model:
+  # Options: cfd_rfdetr or ultralytics
+  backend: cfd_rfdetr
+
+  # CFD RF-DETR model settings
+  # Download .pth weights from the CFD GitHub Releases page and set this path.
+  weights: weights/cfd-2026.05.13-rf-detr-nano-640.pth
+  # 640 for Nano, 1024 for Small/Medium. Match the downloaded model.
+  resolution: 640
+  confidence: 0.30
+
+  # Optional fallback if RF-DETR is too difficult to install.
+  # backend: ultralytics
+  # weights: yolov8n.pt
+  # confidence: 0.25
+
+preprocess:
+  enabled: true
+  gray_world_white_balance: true
+  clahe: true
+  gamma: 1.05
+  denoise: false
+  sharpen: false
+
+tracking:
+  # ByteTrack-style association: high-confidence and low-confidence detections are handled separately.
+  high_thresh: 0.35
+  low_thresh: 0.10
+  match_iou_thresh: 0.25
+  max_lost_frames: 30
+  min_hits_before_count: 2
+
+counting:
+  # line_count is preferred for fish ladder videos.
+  # Set line points as x1,y1,x2,y2 in pixel coordinates.
+  mode: line_count
+  line: [320, 0, 320, 720]
+  # up, down, left, right, or any
+  direction: right
+  # If true, draw a transparent region/line overlay.
+  draw_line: true
+
+video:
+  # Process every nth frame. Use 1 for best counting accuracy.
+  frame_stride: 1
+  save_annotated_video: true
+  save_annotated_frames: false
+  output_fps: null

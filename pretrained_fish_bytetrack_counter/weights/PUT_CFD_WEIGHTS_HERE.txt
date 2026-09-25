@@ -1,0 +1,2 @@
+Download Community Fish Detector .pth weights and place them in this folder.
+Then update configs/cfd_counter.yaml.

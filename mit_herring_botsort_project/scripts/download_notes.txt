@@ -1,0 +1,5 @@
+Dataset access notes:
+- LILA page: MIT Sea Grant River Herring
+- Annotations: COCO format metadata JSON
+- Images: available as a 40GB zip or cloud folders on GCP/AWS/Azure
+- Preferred for lab: download only a subset first, then scale to the full dataset.

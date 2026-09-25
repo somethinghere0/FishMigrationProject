@@ -1,0 +1,36 @@
+input:
+  source: data/videos
+  output_dir: outputs/yolo_results
+
+model:
+  backend: ultralytics
+  # Use a local fish-pretrained YOLO .pt if you have one, otherwise yolo11n.pt/yolov8n.pt for a generic fallback.
+  weights: yolo11n.pt
+  confidence: 0.25
+
+preprocess:
+  enabled: true
+  gray_world_white_balance: true
+  clahe: true
+  gamma: 1.05
+  denoise: false
+  sharpen: false
+
+tracking:
+  high_thresh: 0.35
+  low_thresh: 0.10
+  match_iou_thresh: 0.25
+  max_lost_frames: 30
+  min_hits_before_count: 2
+
+counting:
+  mode: line_count
+  line: [320, 0, 320, 720]
+  direction: right
+  draw_line: true
+
+video:
+  frame_stride: 1
+  save_annotated_video: true
+  save_annotated_frames: false
+  output_fps: null

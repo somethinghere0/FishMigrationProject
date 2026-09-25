@@ -1,0 +1,14 @@
+# Core
+opencv-python
+tqdm
+PyYAML
+Pillow
+numpy
+pandas
+
+# RF-DETR / CFD fine-tuning
+rfdetr
+supervision
+
+# PyTorch is installed separately on Windows if CUDA is needed.
+# See README.md for GPU-specific install commands.

@@ -1,0 +1,19 @@
+# Core
+numpy>=1.24
+opencv-python>=4.8
+pandas>=2.0
+tqdm>=4.66
+PyYAML>=6.0
+scipy>=1.10
+Pillow>=10.0
+
+# Community Fish Detector RF-DETR inference
+# Install may be heavier; use Python 3.10-3.12. If install fails, use the Ultralytics fallback below.
+rfdetr>=1.2.1
+supervision>=0.22.0
+
+# Optional fallback / comparison model
+ultralytics>=8.3.0
+
+# Optional plotting
+matplotlib>=3.8
