@@ -1,0 +1,8 @@
+# YOLO dataset config for single-class herring/fish detection.
+# Labels must be YOLO format: class_id x_center y_center width height, normalized 0 to 1.
+path: C:\Users\zavan\Downloads\FishProject\herring_yolo_finetune_windows\dataset
+train: images/train
+val: images/val
+
+names:
+  0: fish
